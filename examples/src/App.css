@@ -1,14 +1,11 @@
-.App .red {
+.App {
+  text-align: center;
+}
+
+.App .green-text {
+  color: green;
+}
+
+.App .red-text {
   color: red;
-}
-
-.App .poster {
-  width: 200px
-}
-
-.App .blueBox {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background: crimson;
 }

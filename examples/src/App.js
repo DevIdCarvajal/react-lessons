@@ -1,92 +1,58 @@
-// Imports
+// imports
 import { useState } from "react"
+
 import "./App.css"
+// ...
 
-import { Routes, Route } from "react-router-dom"
+import Quote from "./Quote"
 
-import Header from "./components/Header"
-import CharacterList from "./components/CharacterList"
-import SaiyanList from "./components/SaiyanList"
-import Home from "./components/Home"
-import Contact from "./components/Contact"
-import CharacterDetail from "./components/CharacterDetail"
-import Asteroids from "./components/Asteroids"
-import NoMatch from "./components/NoMatch"
-import Menu from "./components/Menu"
-
-import useFetch from "./hooks/useFetch"
-import AddCharacterContext from "./contexts/AddCharacterContext"
-
-import { motion } from "framer-motion"
-
-// Function
+// presentation logic
 const App = () => {
+  
+  // initialization
+  const [heading, setHeading] = useState("Hola Querido Mundo")
+  const [quotes, setQuotes] = useState(["Cita 1", "Cita 2"])
+  const [showMessage, setShowMessage] = useState(false)
 
-  // Private states & functions
-  // const [urlData, setUrlData] = useState("https://jsonplaceholder.typicode.com/users")
-  const [maximum, setMaximum] = useState(0)
-  const increaseMaximum = () => setMaximum(maximum+1)
+  // more logic
+  const changeMessage = () => {
 
-  // const changeUrlData = (start, end) => {
-  //   setUrlData("https://jsonplaceholder.typicode.com/users?start=" +
-  //               start + "&end=" + end)
-  // }
+    if(!showMessage) {
+      setHeading("Adiós Mundo Cruel")
+      setShowMessage(true)
+    }
+    else {
+      setHeading("Hola Querido Mundo")
+      setShowMessage(false)
+    }
+  }
   
-  // Initialize data
-  const titleApp = "Feliz Día de Goku"
-  
-  // Retrieve data
-  const [
-    characters,
-    setCharacters,
-    loadingCharacters,
-    errorCharacters
-  // ] = useFetch(urlData)
-  ] = useFetch("https://jsonplaceholder.typicode.com/users")
-  
+  // render (JSX)
   return (
     <div className="App">
+      <h1>{ heading }</h1>
 
-      <motion.div
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5 }}
-        className="blueBox"
-      />
+      <button onClick={changeMessage}>Cambiar mensaje</button>
 
-      {/* <Header
-        titleApp={titleApp}
-        maximum={maximum}
-        increaseMaximum={increaseMaximum}
-      />
+      {
+        showMessage
+        &&
+          <div>
+            <h2>Example Text</h2>
 
-      <hr /> */}
+            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae perferendis, porro cupiditate accusamus nobis ducimus aspernatur rem dolor eius quaerat odit natus dignissimos quisquam amet atque, quo fugit mollitia obcaecati?</p>
+          </div>
+      }
 
-      <Menu />
+      <h2>Quotes</h2>
 
-      <hr />
+      <ul>
+      {/* quotes.map( quote => <li>{quote}</li> ) */}
 
-      <Routes>
-        <Route path="/" element={ <Home title="Goku" /> } />
-        <Route path="characters" element={
-          <AddCharacterContext.Provider value={{
-            characters,
-            setCharacters,
-            loadingCharacters,
-            errorCharacters
-          }}>
-            <CharacterList />
-          </AddCharacterContext.Provider>
-        } />
-        <Route path="contact" element={ <Contact /> } />
-        <Route path="character/:id" element={ <CharacterDetail /> } />
-        <Route path="saiyans" element={ <SaiyanList /> } />
-        <Route path="asteroids" element={ <Asteroids /> } />
-        <Route path="*" element={ <NoMatch /> } />
-      </Routes>
+      { quotes.map( quote => <Quote /> ) }
+      </ul>
     </div>
   )
 }
 
-// Exports
 export default App

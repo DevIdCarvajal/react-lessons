@@ -1,10 +1,24 @@
-const Header = () => {
+import { useState } from "react"
+
+const Header = ({heading, changeMessage}) => {
+  const [message, setMessage] = useState(heading)
   
   return (
     <div>
-      <h1>{ heading }</h1>
+      <h1>{heading}</h1>
 
-      <button onClick={changeMessage}>Cambiar mensaje</button>
+      <div>
+        Escribe tu nuevo mensaje:
+        <input
+          type="text"
+          value={message}
+          onChange={e => setMessage(e.target.value)}
+        />
+      </div>
+
+      <button onClick={() => changeMessage(message)}>
+        Cambiar mensaje
+      </button>
     </div>
   )
 }

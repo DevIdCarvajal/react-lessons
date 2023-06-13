@@ -1,7 +1,7 @@
 import bulletImg from "./bullet.png"
 import "./Quote.css"
 
-const Quote = ({text, image}) => {
+const Quote = ({text, image, author}) => {
   
   return (
     <div className="Quote">
@@ -12,10 +12,15 @@ const Quote = ({text, image}) => {
           style={{ width: "240px" }}
         />
       </div>
-      <cite>
-        <img src={bulletImg} alt="·" />
-        {text}
-      </cite>
+      <div>
+        <cite>
+          <img src={bulletImg} alt="·" />
+          {text}
+        </cite>
+      </div>
+      <div>
+        ({author})
+      </div>
     </div>
   )
 }

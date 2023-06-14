@@ -6,6 +6,9 @@ import "./App.css"
 import Quote from "./components/Quote/Quote"
 import Header from "./components/Header/Header"
 
+import useFetch from "./hooks/useFetch"
+import UserContext from "./contexts/user"
+
 /* 
 const mockData = [
   {
@@ -25,25 +28,34 @@ const App = () => {
   // initialization
   const [heading, setHeading] = useState("Hola Querido Mundo")
   const [quotes, setQuotes] = useState(null)
+  const [totalQuotes, setTotalQuotes] = useState(0)
   const [showMessage, setShowMessage] = useState(false)
+
+  //const [urlRequest, setUrlRequest] = useState("https://type.fit/api/quotes")
+  const [urlRequest, setUrlRequest] = useState("")
+
+  const [userData, setUserData] = useState("David")
   
-  // side effects 
+  // side effects
+  let [data, loading, error] = useFetch(urlRequest)
+
   useEffect(() => {
-    fetch("https://type.fit/api/quotes")
-      .then(response => response.json())
-      .then(quotes => {
-        const quotesFiltered = quotes.map(quote => {
-          return {
-            text: quote.text,
-            image: "",
-            author: quote.author
-          }
-        })
-        
-        setQuotes(quotesFiltered)
+    if(data) {
+      const quotesFiltered = data.map(quote => {
+        return {
+          text: quote.text,
+          image: "",
+          author: quote.author
+        }
       })
-      .catch(error => console.log("La API no me quiere"))
-  }, [])
+      
+      setQuotes(quotesFiltered)
+    }
+  }, [data])
+
+  useEffect(() => {
+    setTotalQuotes(quotes ? quotes.length : 0)
+  }, [quotes])
 
   // more logic
   const changeMessage = message => setHeading(message)
@@ -51,10 +63,12 @@ const App = () => {
   // render (JSX)
   return (
     <div className="App">
-      <Header
-        heading={heading}
-        changeMessage={changeMessage}
-      />
+      <UserContext.Provider value={userData}>
+        <Header
+          heading={heading}
+          changeMessage={changeMessage}
+        />
+      </UserContext.Provider>
 
       <button onClick={() => setShowMessage(!showMessage)}>
         {!showMessage ? "Mostrar" : "Ocultar"}
@@ -70,24 +84,28 @@ const App = () => {
           </div>
       }
 
-      <h2>Quotes</h2>
+      <h2>Quotes ({totalQuotes})</h2>
 
       <div>
       {
-        quotes
+        error
         ?
-        quotes.map((quote, index) =>
-          <Quote
-            text={quote.text}
-            image={quote.image}
-            author={quote.author}
-            key={index}
-          />
-        )
+        <p>Error en el servidor</p>
         :
-        <p>Cargando citas...</p>
+          loading || !quotes
+          ?
+          <p>Cargando citas...</p>
+          :
+          quotes.map((quote, index) =>
+            <Quote
+              text={quote.text}
+              image={quote.image}
+              author={quote.author}
+              key={index}
+            />
+          )
       }
-        <button onClick={() => setQuotes([])}>Limpiar</button>
+        <button onClick={() => setQuotes(null)}>Limpiar</button>
       </div>
     </div>
   )

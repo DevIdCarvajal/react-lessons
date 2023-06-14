@@ -2,7 +2,6 @@ import bulletImg from "./bullet.png"
 import "./Quote.css"
 
 const Quote = ({text, image, author}) => {
-  
   return (
     <div className="Quote">
       <div>

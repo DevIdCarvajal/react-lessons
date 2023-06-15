@@ -1,9 +1,15 @@
+//import { useContext } from "react"
 import bulletImg from "./bullet.png"
-import "./Quote.css"
+import "./Quote.scss"
 
-const Quote = ({text, image, author}) => {
+import { Link } from "react-router-dom"
+
+const Quote = ({id, text, image, author}) => {
+  // const dark = useContext(ThemeContext)
+  const dark = true
+  
   return (
-    <div className="Quote">
+    <div className={ `Quote${ dark ? " dark" : "" }` }>
       <div>
         <img
           src={image}
@@ -19,6 +25,9 @@ const Quote = ({text, image, author}) => {
       </div>
       <div>
         ({author})
+      </div>
+      <div>
+        <Link to={`/quote/${id}`}>Ir al detalle</Link>
       </div>
     </div>
   )

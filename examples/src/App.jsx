@@ -1,13 +1,15 @@
 // imports
-import { useEffect, useState } from "react"
+import { useState } from "react"
+import { Routes, Route } from "react-router-dom"
 
 import "./App.css"
 
-import Quote from "./components/Quote/Quote"
-import Header from "./components/Header/Header"
-
-import useFetch from "./hooks/useFetch"
 import UserContext from "./contexts/user"
+
+import Header from "./components/Header/Header"
+import HiddenText from "./components/HiddenText/HiddenText"
+import QuotesList from "./components/QuotesList/QuotesList"
+import QuoteDetail from "./components/QuoteDetail/QuoteDetail"
 
 /* 
 const mockData = [
@@ -25,39 +27,11 @@ const mockData = [
 // presentation logic
 const App = () => {
   
-  // initialization
+  // ---- initialization ----
   const [heading, setHeading] = useState("Hola Querido Mundo")
-  const [quotes, setQuotes] = useState(null)
-  const [totalQuotes, setTotalQuotes] = useState(0)
-  const [showMessage, setShowMessage] = useState(false)
-
-  //const [urlRequest, setUrlRequest] = useState("https://type.fit/api/quotes")
-  const [urlRequest, setUrlRequest] = useState("")
-
   const [userData, setUserData] = useState("David")
-  
-  // side effects
-  let [data, loading, error] = useFetch(urlRequest)
 
-  useEffect(() => {
-    if(data) {
-      const quotesFiltered = data.map(quote => {
-        return {
-          text: quote.text,
-          image: "",
-          author: quote.author
-        }
-      })
-      
-      setQuotes(quotesFiltered)
-    }
-  }, [data])
-
-  useEffect(() => {
-    setTotalQuotes(quotes ? quotes.length : 0)
-  }, [quotes])
-
-  // more logic
+  // ---- more logic ----
   const changeMessage = message => setHeading(message)
   
   // render (JSX)
@@ -70,43 +44,14 @@ const App = () => {
         />
       </UserContext.Provider>
 
-      <button onClick={() => setShowMessage(!showMessage)}>
-        {!showMessage ? "Mostrar" : "Ocultar"}
-      </button>
+      <hr />
 
-      {
-        showMessage
-        &&
-          <div>
-            <h2>Example Text</h2>
-
-            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Molestiae perferendis, porro cupiditate accusamus nobis ducimus aspernatur rem dolor eius quaerat odit natus dignissimos quisquam amet atque, quo fugit mollitia obcaecati?</p>
-          </div>
-      }
-
-      <h2>Quotes ({totalQuotes})</h2>
-
-      <div>
-      {
-        error
-        ?
-        <p>Error en el servidor</p>
-        :
-          loading || !quotes
-          ?
-          <p>Cargando citas...</p>
-          :
-          quotes.map((quote, index) =>
-            <Quote
-              text={quote.text}
-              image={quote.image}
-              author={quote.author}
-              key={index}
-            />
-          )
-      }
-        <button onClick={() => setQuotes(null)}>Limpiar</button>
-      </div>
+      <Routes>
+        <Route path="/" element={ <HiddenText /> } />
+        <Route path="quotes" element={ <QuotesList /> } />
+        <Route path="quote/:id" element={ <QuoteDetail /> } />
+        <Route path="*" element={ <p>Estos no son</p> } />
+      </Routes>
     </div>
   )
 }

@@ -1,0 +1,10 @@
+$dark-color: darkslategray;
+
+.Quote {
+  margin: 20px 0;
+  text-align: "center"
+}
+
+.Quote.dark {
+  background-color: $dark-color;
+}

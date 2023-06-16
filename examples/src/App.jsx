@@ -8,7 +8,7 @@ import UserContext from "./contexts/user"
 
 import Header from "./components/Header/Header"
 import HiddenText from "./components/HiddenText/HiddenText"
-import QuotesList from "./components/QuotesList/QuotesList"
+import QuotesListRedux from "./components/QuotesList/QuotesListRedux"
 import QuoteDetail from "./components/QuoteDetail/QuoteDetail"
 
 /* 
@@ -48,7 +48,7 @@ const App = () => {
 
       <Routes>
         <Route path="/" element={ <HiddenText /> } />
-        <Route path="quotes" element={ <QuotesList /> } />
+        <Route path="quotes" element={ <QuotesListRedux /> } />
         <Route path="quote/:id" element={ <QuoteDetail /> } />
         <Route path="*" element={ <p>Estos no son</p> } />
       </Routes>

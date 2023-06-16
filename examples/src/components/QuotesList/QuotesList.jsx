@@ -7,8 +7,8 @@ import useFetch from "../../hooks/useFetch"
 const QuotesList = () => {
   const [totalQuotes, setTotalQuotes] = useState(0)
   const [quotes, setQuotes] = useState(null)
-  const [urlRequest, setUrlRequest] = useState("https://type.fit/api/quotes")
-  // const [urlRequest, setUrlRequest] = useState("")
+  // const [urlRequest, setUrlRequest] = useState("https://type.fit/api/quotes")
+  const [urlRequest, setUrlRequest] = useState("")
   let [data, loading, error] = useFetch(urlRequest)
 
   // ---- side effects ----

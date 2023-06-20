@@ -1,0 +1,13 @@
+$saiyanColor: orange;
+
+.character.black {
+  color: black
+}
+
+.character.yellow {
+  color: $saiyanColor
+}
+
+.character.tached {
+  text-decoration: line-through;
+}

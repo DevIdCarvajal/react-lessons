@@ -1,0 +1,9 @@
+$image-width: 150px;
+
+.New {
+  text-align: center;
+
+  img {
+    max-width: $image-width;
+  }
+}

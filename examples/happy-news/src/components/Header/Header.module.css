@@ -1,0 +1,17 @@
+.headerContainer {
+  text-align: center;
+}
+
+.mainTitle {
+  text-decoration: underline;
+}
+
+.darkTheme {
+  background-color: black;
+  color: white;
+}
+
+.lightTheme {
+  background-color: white;
+  color: black;
+}

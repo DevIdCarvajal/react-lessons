@@ -1,0 +1,11 @@
+.Header {
+  text-align: center;
+}
+
+.Header h1 {
+  text-decoration: underline;
+}
+
+.Header img {
+  width: 120px;
+}

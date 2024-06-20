@@ -1,0 +1,13 @@
+.NewsList {
+  text-align: center;
+}
+
+.NewsList.darkTheme {
+  background-color: darkslateblue;
+  color: azure;
+}
+
+.NewsList.lightTheme {
+  background-color: azure;
+  color: darkslateblue;
+}

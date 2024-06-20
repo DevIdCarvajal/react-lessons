@@ -1,0 +1,10 @@
+$margin-global: 10px 0;
+
+.QuotesList {
+  text-align: center;
+  list-style-type: none;
+
+  li {
+    margin: $margin-global;
+  }
+}

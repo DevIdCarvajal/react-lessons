@@ -1,0 +1,1 @@
+export const validateTitle = title => title?.length > 3

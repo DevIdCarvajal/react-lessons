@@ -1,0 +1,19 @@
+$border-default: 1px solid;
+
+.AddItemForm {
+  text-align: left;
+  margin: 0 auto;
+  width: 480px;
+
+  div {
+    margin: 10px 0;
+  }
+
+  .textInput {
+    border: $border-default black;
+  }
+
+  .errorInput {
+    border: $border-default crimson;
+  }
+}

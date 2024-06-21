@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -7,9 +8,10 @@ const SecondaryTitle = styled.h4`
   text-decoration: underline;
 `
 
-const ItemsList = ({ items }) => {
-
+const ItemsListWR = () => {
   const [totalItems, setTotalItems] = useState(0)
+
+  const items = useSelector(state => state.items)
 
   useEffect(() => {
     setTotalItems(items.length)
@@ -36,4 +38,4 @@ const ItemsList = ({ items }) => {
   )
 }
 
-export default ItemsList
+export default ItemsListWR

@@ -1,20 +1,24 @@
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 import './AddItemForm.scss'
 
 import { validateTitle } from '../../utils/validations'
+import { addItem } from '../../slices/items'
 
-const AddItemForm = ({ addNewItem }) => {
+const AddItemFormWR = () => {
 
   const [title, setTitle] = useState('')
   const [url, setUrl] = useState('')
   const [error, setError] = useState(false)
 
+  const dispatch = useDispatch()
+
   const validate = () => {
     
     // Si los datos están bien
     if (validateTitle(title) && url) {
-      addNewItem({ title, url })
+      dispatch(addItem({ title, url }))
 
       setTitle('')
       setUrl('')
@@ -61,4 +65,4 @@ const AddItemForm = ({ addNewItem }) => {
   )
 }
 
-export default AddItemForm
+export default AddItemFormWR

@@ -2,7 +2,7 @@
 
 1. Implementar una aplicación en React que responda a la arquitectura de componentes definida en la siguiente imagen:
 
-    ![Árbol de componentes](../lessons/components-tree.png "Árbol de componentes")
+    ![Árbol de componentes](../lessons/1-environment/components-tree.png "Árbol de componentes")
 
 2. Implementar las siguientes funcionalidades asociadas a cada componente:
 
